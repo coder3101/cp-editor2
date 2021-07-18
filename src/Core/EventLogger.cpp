@@ -38,7 +38,7 @@ QTextStream Log::logStream;
 const int Log::NUMBER_OF_LOGS_TO_KEEP = 50;
 const int Log::MAXIMUM_FUNCTION_NAME_SIZE = 30;
 const int Log::MAXIMUM_FILE_NAME_SIZE = 30;
-const QString Log::LOG_DIR_NAME = "cpeditorLogFiles";
+const QString Log::LOG_DIR_NAME = "log";
 const QString Log::LOG_FILE_NAME = "cpeditor";
 
 void Log::init(unsigned int instance, bool dumptoStderr)
@@ -47,11 +47,13 @@ void Log::init(unsigned int instance, bool dumptoStderr)
     if (!dumptoStderr)
     {
         // get the path to the log file
-        auto path = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
+        auto path = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
         LOG_ERR_IF(path.isEmpty(), "Failed to get writable temp location");
 
         QDir dir(path);
+        dir.mkpath(path);
         dir.mkdir(LOG_DIR_NAME);
+
         if (dir.cd(LOG_DIR_NAME))
         {
             // keep NUMBER_OF_LOGS_TO_KEEP log files
@@ -142,7 +144,7 @@ void Log::revealInFileManager()
 
 void Log::clearOldLogs()
 {
-    auto path = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
+    auto path = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
     QDir dir(path);
     if (dir.cd(LOG_DIR_NAME))
     {
