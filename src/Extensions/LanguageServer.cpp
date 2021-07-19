@@ -50,7 +50,7 @@ LanguageServer::~LanguageServer()
     }
 }
 
-void LanguageServer::openDocument(QString const &path, QCodeEditor *editor, MessageLogger *log)
+void LanguageServer::openDocument(QString const &path, Editor::CodeEditor *editor, MessageLogger *log)
 {
     if (isDocumentOpen())
     {
@@ -199,21 +199,21 @@ void LanguageServer::performConnection()
     LOG_INFO("All language server connections have been established");
 }
 
-QCodeEditor::SeverityLevel LanguageServer::lspSeverity(int in)
+Editor::CodeEditor::SeverityLevel LanguageServer::lspSeverity(int in)
 {
     switch (in)
     {
     case 1:
-        return QCodeEditor ::SeverityLevel::Error;
+        return Editor::CodeEditor ::SeverityLevel::Error;
     case 2:
-        return QCodeEditor::SeverityLevel::Warning;
+        return Editor::CodeEditor::SeverityLevel::Warning;
     case 3:
-        return QCodeEditor::SeverityLevel::Information;
+        return Editor::CodeEditor::SeverityLevel::Information;
     case 4:
-        return QCodeEditor::SeverityLevel::Hint;
+        return Editor::CodeEditor::SeverityLevel::Hint;
     }
     // Nothing matched
-    return QCodeEditor::SeverityLevel::Error;
+    return Editor::CodeEditor::SeverityLevel::Error;
 }
 
 void LanguageServer::initializeLSP(QString const &filePath)
@@ -234,7 +234,7 @@ void LanguageServer::onLSPServerNotificationArrived(QString const &method, QJson
         for (auto e : doc)
         {
             QString tooltip = e.toObject()["message"].toString();
-            QCodeEditor::SeverityLevel level = lspSeverity(e.toObject()["severity"].toInt());
+            Editor::CodeEditor::SeverityLevel level = lspSeverity(e.toObject()["severity"].toInt());
 
             auto beg = e.toObject()["range"].toObject()["start"].toObject();
             auto end = e.toObject()["range"].toObject()["end"].toObject();

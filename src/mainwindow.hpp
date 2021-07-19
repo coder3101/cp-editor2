@@ -22,15 +22,20 @@
 
 class AppWindow;
 class MessageLogger;
-class QCodeEditor;
+namespace Editor
+{
+class CodeEditor;
+}
 class QFileSystemWatcher;
 class QPushButton;
 class QSplitter;
 class QTemporaryDir;
+class AppWindow;
 
-QT_BEGIN_NAMESPACE namespace Ui
+QT_BEGIN_NAMESPACE
+namespace Ui
 {
-    class MainWindow;
+class MainWindow;
 }
 QT_END_NAMESPACE
 
@@ -39,6 +44,7 @@ namespace Core
 class Checker;
 class Compiler;
 class Runner;
+class FakeVimCommand;
 } // namespace Core
 
 namespace Extensions
@@ -51,7 +57,13 @@ namespace Widgets
 {
 class TestCases;
 }
-
+namespace FakeVim
+{
+namespace Internal
+{
+class FakeVimHandler;
+}
+} // namespace FakeVim
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -85,7 +97,7 @@ class MainWindow : public QMainWindow
     QString getProblemURL() const;
     QString getCompleteTitle() const;
     QString getTabTitle(bool complete, bool star, int removeLength = 0);
-    QCodeEditor *getEditor() const;
+    Editor::CodeEditor *getEditor() const;
     bool isUntitled() const;
 
     void setProblemURL(const QString &url);
@@ -195,7 +207,7 @@ class MainWindow : public QMainWindow
     };
 
     Ui::MainWindow *ui;
-    QCodeEditor *editor;
+    Editor::CodeEditor *editor;
     QString language;
     bool isLanguageSet = false;
 
@@ -222,6 +234,7 @@ class MainWindow : public QMainWindow
 
     QPushButton *submitToCodeforces = nullptr;
     Extensions::CFTool *cftool = nullptr;
+    FakeVim::Internal::FakeVimHandler *fakevimHandler = nullptr;
 
     Widgets::TestCases *testcases = nullptr;
 
@@ -247,5 +260,6 @@ class MainWindow : public QMainWindow
     QString compileCommand() const;
     int timeLimit() const;
     void updateCompileAndRunButtons() const;
+    friend class Core::FakeVimCommand;
 };
 #endif // MAINWINDOW_HPP

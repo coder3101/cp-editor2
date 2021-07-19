@@ -1,6 +1,3 @@
-[submodule "third_party/QCodeEditor"]
-	path = third_party/QCodeEditor
-	url = https://github.com/cpeditor/QCodeEditor
 [submodule "third_party/singleapplication"]
 	path = third_party/singleapplication
 	url = https://github.com/itay-grudev/SingleApplication.git
@@ -13,6 +10,15 @@
 [submodule "third_party/testlib"]
 	path = third_party/testlib
 	url = https://github.com/MikeMirzayanov/testlib
+[submodule "third_party/extra-cmake-modules"]
+	path = third_party/extra-cmake-modules
+	url = https://github.com/KDE/extra-cmake-modules
+[submodule "third_party/syntax-highlighting"]
+	path = third_party/syntax-highlighting
+	url = https://github.com/KDE/syntax-highlighting
 [submodule "third_party/qhttp"]
 	path = third_party/qhttp
 	url = https://github.com/cpeditor/qhttp
+[submodule "third_party/FakeVim"]
+	path = third_party/FakeVim
+	url = https://github.com/cpeditor/FakeVim

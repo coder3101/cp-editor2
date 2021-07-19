@@ -108,11 +108,4 @@ void SettingsUpdater::updateSetting(QSettings &setting)
                 QVariantList{QStringList{"file", setting.value("save_path").toString()}});
         }
     }
-
-    QString theme = SettingsManager::get("Editor Theme")
-                        .toString()
-                        .replace("Monkai", "Monokai")
-                        .replace("Drakula", "Dracula")
-                        .replace("Solarised", "Solarized");
-    SettingsManager::set("Editor Theme", theme);
 }

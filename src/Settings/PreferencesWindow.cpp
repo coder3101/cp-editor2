@@ -231,9 +231,9 @@ PreferencesWindow::PreferencesWindow(QWidget *parent) : QMainWindow(parent)
             .end()
         .end()
         .dir(TRKEY("Appearance"))
-            .page(TRKEY("General"),{"Locale", "UI Style", "Editor Theme", "Opacity", "Test Case Maximum Height",
+            .page(TRKEY("General"),{"Locale", "UI Style", "Code Editor Theme", "Opacity", "Test Case Maximum Height",
                                     "Show Compile And Run Only", "Display EOLN In Diff", "Extra Bottom Margin"})
-            .page(TRKEY("Font"), {"Show Only Monospaced Font", "Editor Font", "Test Cases Font", "Message Logger Font",
+            .page(TRKEY("Font"), {"Show Only Monospaced Font", "Code Editor Font", "Test Cases Font", "Message Logger Font",
                                   "Use Custom Application Font", "Custom Application Font"})
         .end()
         .dir(TRKEY("Actions"))

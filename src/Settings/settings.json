@@ -20,12 +20,12 @@
     "notr": true
   },
   {
-    "name": "Editor Font",
+    "name": "Code Editor Font",
     "type": "QFont",
     "default": "[](){ QFont font = QFontDatabase::systemFont(QFontDatabase::FixedFont); font.setStyleHint(QFont::TypeWriter); return font; }()",
     "param": "true",
     "tip": "The font of the code editor",
-    "old": ["font"]
+    "old": ["font", "editor_font"]
   },
   {
     "name": "Use Custom Application Font",
@@ -336,12 +336,13 @@
     "notr": true
   },
   {
-    "name": "Editor Theme",
+    "name": "Code Editor Theme",
     "type": "QString",
-    "default": "Light",
+    "default": "Default",
     "ui": "QComboBox",
-    "param": "QStringList {\"Light\", \"Dracula\", \"Monokai\", \"Solarized\", \"Solarized Dark\"}",
-    "tip": "The syntax highlight theme of the code editor"
+    "param": "Editor::KSyntaxHighlightingRepository::themeNames()",
+    "tip": "The syntax highlight theme of the code editor",
+    "old": ["edior_theme"]
   },
   {
     "name": "Detached Run Terminal Program",

@@ -16,7 +16,7 @@
  */
 
 #include "Extensions/YAPFormatter.hpp"
-#include <QCodeEditor>
+#include "Editor/CodeEditor.hpp"
 #include <QTextBlock>
 #include <QTextCursor>
 #include <QTextDocument>
@@ -24,7 +24,7 @@
 namespace Extensions
 {
 
-YAPFormatter::YAPFormatter(QCodeEditor *editor, const QString &lang, bool selectionOnly, bool logOnNoChange,
+YAPFormatter::YAPFormatter(Editor::CodeEditor *editor, const QString &lang, bool selectionOnly, bool logOnNoChange,
                            MessageLogger *log, QObject *parent)
     : CodeFormatter(editor, lang, selectionOnly, logOnNoChange, log, parent)
 {

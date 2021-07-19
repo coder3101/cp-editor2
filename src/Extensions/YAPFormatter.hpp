@@ -27,7 +27,7 @@ class YAPFormatter : public CodeFormatter
     Q_OBJECT
 
   public:
-    explicit YAPFormatter(QCodeEditor *editor, const QString &lang, bool selectionOnly, bool logOnNoChange,
+    explicit YAPFormatter(Editor::CodeEditor *editor, const QString &lang, bool selectionOnly, bool logOnNoChange,
                           MessageLogger *log, QObject *parent = nullptr);
 
   protected:

@@ -16,11 +16,10 @@
  */
 
 #include "Settings/CodeSnippetsPage.hpp"
+#include "Editor/CodeEditor.hpp"
 #include "Settings/DefaultPathManager.hpp"
 #include "Util/FileUtil.hpp"
-#include "Util/QCodeEditorUtil.hpp"
 #include "generated/SettingsHelper.hpp"
-#include <QCodeEditor>
 #include <QInputDialog>
 #include <QLabel>
 #include <QListWidget>
@@ -98,8 +97,8 @@ CodeSnippetsPage::CodeSnippetsPage(QString language, QWidget *parent)
     snippetNameLabel = new QLabel();
     snippetLayout->addWidget(snippetNameLabel);
 
-    editor = new QCodeEditor();
-    connect(editor, &QCodeEditor::textChanged, this, &CodeSnippetsPage::updateButtons);
+    editor = new Editor::CodeEditor();
+    connect(editor, &Editor::CodeEditor::textChanged, this, &CodeSnippetsPage::updateButtons);
     snippetLayout->addWidget(editor);
 
     noSnippetWidget = new QWidget();
@@ -149,7 +148,7 @@ void CodeSnippetsPage::makeUITheSameAsDefault()
 
 void CodeSnippetsPage::makeUITheSameAsSettings()
 {
-    Util::applySettingsToEditor(editor, lang);
+    editor->applySettings(lang);
     auto settingsKeys = SettingsHelper::getLanguageConfig(lang).getSnippets();
     for (auto const &key : settingsKeys)
     {

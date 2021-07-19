@@ -8,7 +8,7 @@ pkgdesc='The editor for competitive programming'
 arch=('x86_64')
 url='https://github.com/cpeditor/cpeditor'
 license=('GPL3')
-depends=('qt5-base' 'hicolor-icon-theme')
+depends=('qt5-base' 'syntax-highlighting' 'hicolor-icon-theme')
 makedepends=(
 	"cmake"
 	"git"

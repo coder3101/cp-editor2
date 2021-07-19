@@ -24,8 +24,7 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt5 COMPONENTS Network REQUIRED)
 find_package(Qt5 COMPONENTS LinguistTools REQUIRED)
 find_package(Python3 COMPONENTS Interpreter REQUIRED)
-
-add_subdirectory(third_party/QCodeEditor)
+find_package(KF5SyntaxHighlighting REQUIRED)
 
 set(QAPPLICATION_CLASS QApplication CACHE STRING "Inheritance class for SingleApplication")
 
@@ -34,6 +33,8 @@ add_subdirectory(third_party/singleapplication)
 add_subdirectory(third_party/QtFindReplaceDialog/dialogs)
 
 add_subdirectory(third_party/lsp-cpp)
+
+add_subdirectory(third_party/FakeVim)
 
 add_subdirectory(third_party/qhttp)
 
@@ -140,7 +141,11 @@ add_executable(cpeditor
     src/Core/Compiler.cpp
     src/Core/Compiler.hpp
     src/Core/EventLogger.cpp
-    src/Core/EventLogger.hpp
+    src/Core/EventLogger.hpp 
+    src/Core/FakeVimProxy.cpp
+    src/Core/FakeVimProxy.hpp 
+    src/Core/FakeVimCommand.cpp
+    src/Core/FakeVimCommand.hpp
     src/Core/MessageLogger.cpp
     src/Core/MessageLogger.hpp
     src/Core/Runner.cpp
@@ -153,6 +158,15 @@ add_executable(cpeditor
     src/Core/TestCasesCopyPaster.hpp
     src/Core/Translator.cpp
     src/Core/Translator.hpp
+    
+    src/Editor/CodeEditor.cpp
+    src/Editor/CodeEditor.hpp
+    src/Editor/CodeEditorSideBar.cpp
+    src/Editor/CodeEditorSideBar.hpp
+    src/Editor/KSHRepository.cpp
+    src/Editor/KSHRepository.hpp
+    src/Editor/LanguageRepository.cpp
+    src/Editor/LanguageRepository.hpp
 
     src/Extensions/CFTool.cpp
     src/Extensions/CFTool.hpp
@@ -164,8 +178,6 @@ add_executable(cpeditor
     src/Extensions/YAPFormatter.hpp
     src/Extensions/CompanionServer.cpp
     src/Extensions/CompanionServer.hpp
-    src/Extensions/EditorTheme.cpp
-    src/Extensions/EditorTheme.hpp
     src/Extensions/LanguageServer.cpp
     src/Extensions/LanguageServer.hpp
 
@@ -207,8 +219,6 @@ add_executable(cpeditor
 
     src/Util/FileUtil.cpp
     src/Util/FileUtil.hpp
-    src/Util/QCodeEditorUtil.cpp
-    src/Util/QCodeEditorUtil.hpp
     src/Util/Singleton.hpp
     src/Util/Util.cpp
     src/Util/Util.hpp
@@ -259,14 +269,16 @@ add_executable(cpeditor
 include_directories("generated/")
 include_directories("src/")
 
+target_link_libraries(diff_match_patch PRIVATE Qt5::Core)
+
 target_link_libraries(cpeditor PRIVATE LSPClient)
-target_link_libraries(cpeditor PRIVATE QCodeEditor)
 target_link_libraries(cpeditor PRIVATE Qt5::Network)
 target_link_libraries(cpeditor PRIVATE Qt5::Widgets)
 target_link_libraries(cpeditor PRIVATE QtFindReplaceDialog)
 target_link_libraries(cpeditor PRIVATE SingleApplication)
+target_link_libraries(cpeditor PRIVATE fakevim)
 target_link_libraries(cpeditor PRIVATE QHttp)
-target_link_libraries(diff_match_patch PRIVATE Qt5::Core)
+target_link_libraries(cpeditor PRIVATE KF5::SyntaxHighlighting)
 target_link_libraries(cpeditor PRIVATE diff_match_patch)
 
 if(MSVC)

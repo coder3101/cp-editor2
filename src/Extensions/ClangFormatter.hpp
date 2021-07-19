@@ -33,7 +33,7 @@ class ClangFormatter : public CodeFormatter
     Q_OBJECT
 
   public:
-    explicit ClangFormatter(QCodeEditor *editor, const QString &lang, bool selectionOnly, bool logOnNoChange,
+    explicit ClangFormatter(Editor::CodeEditor *editor, const QString &lang, bool selectionOnly, bool logOnNoChange,
                             MessageLogger *log, QObject *parent = nullptr);
 
   protected:

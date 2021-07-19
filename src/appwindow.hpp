@@ -51,7 +51,9 @@ class UpdateChecker;
 namespace Core
 {
 class SessionManager;
-}
+class FakeVimCommand;
+class FakeVimProxy;
+} // namespace Core
 
 class AppWindow : public QMainWindow
 {
@@ -78,6 +80,10 @@ class AppWindow : public QMainWindow
     bool forceClose();
 
     void showOnTop();
+
+    bool closeTab(int index, bool noConfirmQuit = false);
+
+    bool closeWindow(MainWindow *window, bool noConfirmQuit = false);
 
   private slots:
     // UI Slots
@@ -189,8 +195,6 @@ class AppWindow : public QMainWindow
 
     void onEditorLanguageChanged(MainWindow *window);
 
-    void onTabCloseRequested(int);
-
     void onTabChanged(int);
 
     void onLSPTimerElapsedCpp();
@@ -209,8 +213,6 @@ class AppWindow : public QMainWindow
 
     void onViewModeToggle();
 
-    void openTab(const QString &path);
-
   private:
     Ui::AppWindow *ui;
     MessageLogger *activeLogger = nullptr;
@@ -223,6 +225,7 @@ class AppWindow : public QMainWindow
 
     QMetaObject::Connection activeSplitterMoveConnection;
     QMetaObject::Connection activeRightSplitterMoveConnection;
+
     Telemetry::UpdateChecker *updateChecker = nullptr;
     PreferencesWindow *preferencesWindow = nullptr;
     Extensions::CompanionServer *server = nullptr;
@@ -244,9 +247,9 @@ class AppWindow : public QMainWindow
     void saveSettings();
     QVector<QShortcut *> hotkeyObjects;
     void maybeSetHotkeys();
-    bool closeTab(int index);
     void openTab(MainWindow *window);
     void openTab(const MainWindow::EditorStatus &status, bool duplicate = false);
+    void openTab(const QString &path, const QString &lang = "");
     void openTabs(const QStringList &paths);
     void openPaths(const QStringList &paths, bool cpp = true, bool java = true, bool python = true, int depth = -1);
     QStringList openFolder(const QString &path, bool cpp, bool java, bool python, int depth);
@@ -255,10 +258,15 @@ class AppWindow : public QMainWindow
     int getNewUntitledIndex();
     void reAttachLanguageServer(MainWindow *window);
 
+    void setTabAt(int index);
     MainWindow *currentWindow();
     MainWindow *windowAt(int index);
+    int indexOfWindow(MainWindow *window);
+    int tabCount() const;
 
     friend class Core::SessionManager;
+    friend class Core::FakeVimCommand;
+    friend class Core::FakeVimProxy;
 };
 
 #endif // APPWINDOW_HPP

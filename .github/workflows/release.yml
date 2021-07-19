@@ -119,6 +119,36 @@ jobs:
           version: ${{ env.QT_VERSION }}
           arch: ${{ matrix.config.qtarch }}
 
+      - name: Get KDE syntax-highlighting status
+        id: get-kde-syntax-highlighting-status
+        shell: bash
+        run: echo ::set-output name=status::$(git submodule status third_party/syntax-highlighting)
+
+      - name: "[Windows] Restore KDE syntax-highlighting cache"
+        id: kde-syntax-highlighting-cache-windows
+        if: startsWith(matrix.config.os, 'windows')
+        uses: actions/cache@v1
+        with:
+          path: C:/Program Files (x86)/ECM
+          key: kde-syntax-highlighting-${{ matrix.config.os }}-${{ env.QT_VERSION }}-${{ steps.get-kde-syntax-highlighting-status.outputs.status }}
+
+      - name: "[Windows] Build KDE syntax-highlighting"
+        if: startsWith(matrix.config.os, 'windows') && !steps.kde-syntax-highlighting-cache-windows.outputs.cache-hit
+        run: |
+          tools/install_ecm.bat
+          tools/install_ksh.bat
+
+      - name: "[Windows] Set environment for KDE syntax-highlighting"
+        if: startsWith(matrix.config.os, 'windows')
+        shell: bash
+        run: echo "KF5SyntaxHighlighting_DIR=C:/Program Files (x86)/ECM/lib/cmake/KF5SyntaxHighlighting" >> $GITHUB_ENV
+
+      - name: "[Linux/macOS] Build KDE syntax-highlighting"
+        if: startsWith(matrix.config.os, 'ubuntu') || startsWith(matrix.config.os, 'macos')
+        run: |
+          tools/install_ecm.sh
+          tools/install_ksh.sh
+
       - name: "[Windows] Build"
         if: matrix.config.os == 'windows-latest'
         run: |
@@ -276,6 +306,7 @@ jobs:
           mkdir build/out
           mv build/Release/cpeditor.exe build/out
           ../Qt/*/*/bin/windeployqt.exe build/out/cpeditor.exe --no-translations
+          cp "C:/Program Files (x86)/ECM/bin/KF5SyntaxHighlighting.dll" build/out
           cd "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Redist/MSVC"
           echo "VC_REDIST_VERSION=$(ls -dr *.* | head -n1)" >> $GITHUB_ENV
 

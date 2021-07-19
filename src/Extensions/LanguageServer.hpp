@@ -18,7 +18,7 @@
 #ifndef LANGUAGE_SERVER_H
 #define LANGUAGE_SERVER_H
 
-#include <QCodeEditor>
+#include "Editor/CodeEditor.hpp"
 #include <QJsonObject>
 #include <QProcess>
 
@@ -35,7 +35,7 @@ class LanguageServer : public QObject
     explicit LanguageServer(QString const &lang);
     ~LanguageServer() override;
 
-    void openDocument(QString const &path, QCodeEditor *editor, MessageLogger *log);
+    void openDocument(QString const &path, Editor::CodeEditor *editor, MessageLogger *log);
     void closeDocument();
     void requestLinting();
 
@@ -58,10 +58,10 @@ class LanguageServer : public QObject
     void createClient();
     bool shouldCreateClient();
 
-    static QCodeEditor::SeverityLevel lspSeverity(int in);
+    static Editor::CodeEditor::SeverityLevel lspSeverity(int in);
     void initializeLSP(QString const &filePath);
 
-    QCodeEditor *m_editor = nullptr;
+    Editor::CodeEditor *m_editor = nullptr;
     MessageLogger *logger = nullptr;
     LSPClient *lsp = nullptr;
     bool isInitialized = false;

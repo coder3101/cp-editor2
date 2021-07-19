@@ -1651,14 +1651,6 @@ You can use &quot;${filename}&quot; for the complete file name,
         <translation>执行 Python 程序时的命令。这里不应该包含源代码路径。</translation>
     </message>
     <message>
-        <source>Editor Theme</source>
-        <translation>编辑器主题</translation>
-    </message>
-    <message>
-        <source>The syntax highlight theme of the code editor</source>
-        <translation>代码编辑器高亮所用的主题</translation>
-    </message>
-    <message>
         <source>Auto Complete Parentheses</source>
         <translation>自动补全括号</translation>
     </message>
@@ -2423,8 +2415,16 @@ If the output is too long, it will be elided.</source>
         <translation>当获知了一个提交的评测结果时，显示一条气泡消息。你可以在 CP Editor 外看到这条消息。</translation>
     </message>
     <message>
+        <source>The style of the code syntax highlighting.</source>
+        <translation>代码语法高亮的风格。</translation>
+    </message>
+    <message>
+        <source>Code Editor Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Terminal Arguments</source>
-        <translation>终端参数</translation>
+        <translation type="unfinished">终端参数</translation>
     </message>
     <message>
         <source>Terminal Program</source>
@@ -2501,6 +2501,10 @@ The program will be killed if it doesn&apos;t terminate in the time limit.</sour
     <message>
         <source>Use the time limit parsed by Competitive Companion as the time limit of the corresponding tab.</source>
         <translation>为对应的标签页使用由 Competitive Companion 解析得到的时间限制。</translation>
+    </message>
+    <message>
+        <source>Code Editor Theme</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show Only Monospaced Font</source>

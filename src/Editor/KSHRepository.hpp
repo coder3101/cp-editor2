@@ -15,27 +15,24 @@
  *
  */
 
-#ifndef EDITORTHEME_H
-#define EDITORTHEME_H
+#ifndef KSHREPOSITORY_HPP
+#define KSHREPOSITORY_HPP
 
-#include <QMap>
+#include <repository.h>
 
-class QSyntaxStyle;
+class QStringList;
 
-namespace Extensions
+namespace Editor
 {
-class EditorTheme
+class KSyntaxHighlightingRepository
 {
   public:
-    EditorTheme() = delete;
+    static KSyntaxHighlighting::Repository *getSyntaxHighlightingRepository();
+
+    static QStringList themeNames();
 
   private:
-    static QMap<QString, QSyntaxStyle *> styles;
-
-  public:
-    static QSyntaxStyle *query(const QString &name);
-    static void release();
+    static KSyntaxHighlighting::Repository repository;
 };
-} // namespace Extensions
-
-#endif // EDITORTHEME_H
+} // namespace Editor
+#endif // KSHREPOSITORY_HPP

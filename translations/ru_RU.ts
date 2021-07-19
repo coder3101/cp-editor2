@@ -1652,14 +1652,6 @@ You can use &quot;${filename}&quot; for the complete file name,
         <translation>Команда для запуска программы на Python. Она НЕ должна включать путь к исходному файлу.</translation>
     </message>
     <message>
-        <source>Editor Theme</source>
-        <translation>Тема редактора</translation>
-    </message>
-    <message>
-        <source>The syntax highlight theme of the code editor</source>
-        <translation>Синтаксическая подсветка темы редактора кода</translation>
-    </message>
-    <message>
         <source>Auto Complete Parentheses</source>
         <translation>Автоподстановка скобок</translation>
     </message>
@@ -2430,8 +2422,16 @@ If the output is too long, it will be elided.</source>
         <translation>Показывать всплывающие уведомления, когда известен вердикт отправки. Вы сможете видеть сообщения за пределами CP Editor.</translation>
     </message>
     <message>
+        <source>The style of the code syntax highlighting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Code Editor Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Terminal Arguments</source>
-        <translation>Аргументы терминала</translation>
+        <translation type="unfinished">Аргументы терминала</translation>
     </message>
     <message>
         <source>Terminal Program</source>
@@ -2508,6 +2508,10 @@ The program will be killed if it doesn&apos;t terminate in the time limit.</sour
     <message>
         <source>Use the time limit parsed by Competitive Companion as the time limit of the corresponding tab.</source>
         <translation>Использовать лимит времени взятым Competitive Companion-ом как лимит времени соответствующей вкладки.</translation>
+    </message>
+    <message>
+        <source>Code Editor Theme</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show Only Monospaced Font</source>
